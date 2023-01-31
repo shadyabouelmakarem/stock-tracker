@@ -12,11 +12,6 @@
   "resolved" "https://registry.npmjs.org/@types/node/-/node-18.11.5.tgz"
   "version" "18.11.5"
 
-"@vercel/ncc@*":
-  "integrity" "sha512-G9h5ZLBJ/V57Ou9vz5hI8pda/YQX5HQszCs3AmIus3XzsmRn/0Ptic5otD3xVST8QLKk7AMk7AqpsyQGN7MZ9A=="
-  "resolved" "https://registry.npmjs.org/@vercel/ncc/-/ncc-0.34.0.tgz"
-  "version" "0.34.0"
-
 "@vitejs/plugin-vue@^3.1.2":
   "integrity" "sha512-3zxKNlvA3oNaKDYX0NBclgxTQ1xaFdL7PzwF6zj9tGFziKwmBa3Q/6XcJQxudlT81WxDjEhHmevvIC4Orc1LhQ=="
   "resolved" "https://registry.npmjs.org/@vitejs/plugin-vue/-/plugin-vue-3.1.2.tgz"
@@ -280,9 +275,9 @@
   "resolved" "https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz"
   "version" "8.0.0"
 
-"esbuild-linux-64@0.15.12":
-  "integrity" "sha512-QcgCKb7zfJxqT9o5z9ZUeGH1k8N6iX1Y7VNsEi5F9+HzN1OIx7ESxtQXDN9jbeUSPiRH1n9cw6gFT3H4qbdvcA=="
-  "resolved" "https://registry.npmjs.org/esbuild-linux-64/-/esbuild-linux-64-0.15.12.tgz"
+"esbuild-windows-64@0.15.12":
+  "integrity" "sha512-VActO3WnWZSN//xjSfbiGOSyC+wkZtI8I4KlgrTo5oHJM6z3MZZBCuFaZHd8hzf/W9KPhF0lY8OqlmWC9HO5AA=="
+  "resolved" "https://registry.npmjs.org/esbuild-windows-64/-/esbuild-windows-64-0.15.12.tgz"
   "version" "0.15.12"
 
 "esbuild@^0.15.9":
