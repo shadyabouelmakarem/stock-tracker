@@ -125,8 +125,8 @@ export default defineComponent({
         <Button class="subscribe-button">Subscribe</Button>
       </form>
     </div>
-    <Card v-if="Object.keys(subscribedStocks).length" class="stocks-card">
-      <table class="data-table">
+    <Card class="stocks-card">
+      <table v-if="Object.keys(subscribedStocks).length" class="data-table">
         <thead>
           <tr class="header-row">
             <th class="header-cell">ISIN</th>
@@ -152,6 +152,9 @@ export default defineComponent({
           </template>
         </tbody>
       </table>
+      <p v-else class="no-subscriptions-note">
+        You are currently not subscribed to any Stock.
+      </p>
     </Card>
   </main>
   <ToastCenter ref="toastCenter" />
@@ -246,6 +249,11 @@ export default defineComponent({
           }
         }
       }
+    }
+
+    .no-subscriptions-note {
+      text-align: center;
+      padding: 30px;
     }
   }
 }
