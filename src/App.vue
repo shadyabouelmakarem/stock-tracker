@@ -7,6 +7,7 @@ import Button from "./components/Button.vue";
 import ToastCenter from "./components/ToastCenter.vue";
 import "./index.css";
 
+// Define the structure of the Stock object
 interface Stock {
   isin: string;
   price: number;
@@ -15,6 +16,7 @@ interface Stock {
 }
 
 export default defineComponent({
+  // Declare the components used in this component
   components: {
     Header,
     TextField,
@@ -24,15 +26,17 @@ export default defineComponent({
   },
   data() {
     return {
-      isin: "",
-      validationError: "",
-      subscribedStocks: {} as Stock,
-      socket: null,
+      isin: "", // the ISIN to be validated and subscribed to
+      validationError: "", // an error message if the ISIN validation fails
+      subscribedStocks: {} as Stock, // a list of stocks that are subscribed to
+      socket: null, // a WebSocket connection
     };
   },
   created() {
+    // Establish a WebSocket connection to the server
     this.socket = new WebSocket("ws://localhost:8425");
 
+    // Show a warning toast if the connection is closed
     this.socket.onclose = (event: any) => {
       console.warn("WebSocket connection closed with code: ", event.code);
       this.$refs.toastCenter.addToast(
@@ -41,6 +45,7 @@ export default defineComponent({
       );
     };
 
+    // Show a success toast when the connection is re-established
     this.socket.onopen = () => {
       if (Object.keys(this.subscribedStocks).length) {
         console.log("WebSocket connection established");
@@ -51,12 +56,14 @@ export default defineComponent({
       }
     };
 
+    // Update the subscribed stocks list with new data from the server
     this.socket.onmessage = (event) => {
       const stock: Stock = JSON.parse(event.data);
       this.subscribedStocks[stock.isin] = stock;
     };
   },
   methods: {
+    // Subscribing to a stock by sending the "ISIN" to the server subscription channel
     submitForm() {
       if (this.subscribedStocks.hasOwnProperty(this.isin)) {
         this.$refs.toastCenter.addToast(
@@ -68,6 +75,7 @@ export default defineComponent({
         this.socket.send(JSON.stringify({ subscribe: this.isin }));
       }
     },
+    // Validate the ISIN on input
     validateISIN(value: string) {
       const isin = value.trim();
       this.validationError = "";

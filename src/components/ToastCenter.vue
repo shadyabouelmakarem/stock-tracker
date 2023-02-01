@@ -19,18 +19,22 @@
 export default {
   data() {
     return {
-      toasts: [],
+      toasts: [], // array of toasts to be displayed
     };
   },
   methods: {
     addToast(message, type = "info") {
-      let id = this.toasts.length + 1;
-      this.toasts.push({ message, type, id });
+      // Add a new toast to the toasts array
+      let id = this.toasts.length + 1; // Generate a unique ID for the new toast
+      this.toasts.push({ message, type, id }); // Add the new toast to the toasts array
+
+      // Remove the toast after 3 seconds
       setTimeout(() => {
         this.removeToast(id);
       }, 3000);
     },
     removeToast(id) {
+      // Remove a toast from the toasts array using its ID
       this.toasts = this.toasts.filter((toast) => {
         return toast.id !== id;
       });
