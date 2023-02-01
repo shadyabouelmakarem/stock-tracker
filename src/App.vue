@@ -4,6 +4,7 @@ import Header from "./components/Header.vue";
 import TextField from "./components/TextField.vue";
 import Card from "./components/Card.vue";
 import Button from "./components/Button.vue";
+import ToastCenter from "./components/ToastCenter.vue";
 import "./index.css";
 
 interface Stock {
@@ -19,6 +20,7 @@ export default defineComponent({
     TextField,
     Card,
     Button,
+    ToastCenter,
   },
   data() {
     return {
@@ -31,6 +33,24 @@ export default defineComponent({
   created() {
     this.socket = new WebSocket("ws://localhost:8425");
 
+    this.socket.onclose = (event: any) => {
+      console.warn("WebSocket connection closed with code: ", event.code);
+      this.$refs.toastCenter.addToast(
+        "Connection interrupted, the current data is not up to date.",
+        "warn"
+      );
+    };
+
+    this.socket.onopen = () => {
+      if (Object.keys(this.subscribedStocks).length) {
+        console.log("WebSocket connection established");
+        this.$refs.toastCenter.addToast(
+          "Connection restablished, the data you are viewing is up to date.",
+          "success"
+        );
+      }
+    };
+
     this.socket.onmessage = (event) => {
       const stock: Stock = JSON.parse(event.data);
       this.subscribedStocks[stock.isin] = stock;
@@ -39,7 +59,10 @@ export default defineComponent({
   methods: {
     submitForm() {
       if (this.subscribedStocks.hasOwnProperty(this.isin)) {
-        console.error("Can't subscribe to an ISIN twice...");
+        this.$refs.toastCenter.addToast(
+          "Can't subscribe to an ISIN twice...",
+          "error"
+        );
       } else {
         this.subscribedStocks[this.isin] = null;
         this.socket.send(JSON.stringify({ subscribe: this.isin }));
@@ -123,6 +146,7 @@ export default defineComponent({
       </table>
     </Card>
   </main>
+  <ToastCenter ref="toastCenter" />
 </template>
 
 <style lang="scss">
