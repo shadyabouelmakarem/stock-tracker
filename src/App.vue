@@ -167,83 +167,110 @@ export default defineComponent({
 .main {
   max-width: var(--max-width);
   margin: 0 auto;
-}
-.form-field {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
 
-  .validation-error {
-    color: red;
-    font-size: 12px;
-    margin-top: 5px;
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+    .validation-error {
+      color: red;
+      font-size: 80%;
+      margin-top: 5px;
+    }
   }
-}
 
-.subscribe-button {
-  cursor: pointer;
-  margin-top: 10px;
-}
+  .subscribe-button {
+    cursor: pointer;
+    margin-top: 10px;
+  }
 
-.stocks-card {
-  margin-top: 20px;
+  .stocks-card {
+    margin-top: 20px;
 
-  .data-table {
-    color: white;
-    border-collapse: collapse;
-    width: 100%;
+    .data-table {
+      color: white;
+      border-collapse: collapse;
+      width: 100%;
 
-    thead {
-      .header-row {
-        border-bottom: 1px solid white;
+      thead {
+        .header-row {
+          border-bottom: 1px solid white;
 
-        .header-cell {
-          padding: 10px;
-          text-align: center;
+          .header-cell {
+            padding: 10px;
+            text-align: center;
+          }
+        }
+      }
+
+      tbody {
+        .data-row {
+          border-top: 1px solid white;
+
+          .data-cell {
+            padding: 10px;
+            width: 20%;
+            text-align: center;
+
+            &.isin-cell {
+              color: blue;
+            }
+
+            &.price-cell {
+              color: green;
+            }
+
+            &.bid-cell {
+              color: yellow;
+            }
+
+            &.ask-cell {
+              color: red;
+            }
+          }
+
+          .unsubscribe-cell {
+            text-align: center;
+
+            .unsubscribe-button {
+              background-color: red;
+              color: white;
+              border: none;
+              border-radius: 5px;
+              padding: 10px 20px;
+              font-size: 16px;
+              cursor: pointer;
+              width: 100%;
+            }
+          }
         }
       }
     }
+  }
+}
 
-    tbody {
-      .data-row {
-        border-top: 1px solid white;
+@media only screen and (max-width: 600px) {
+  .main {
+    font-size: 20px !important;
 
-        .data-cell {
-          padding: 10px;
-          width: 20%;
-          text-align: center;
+    .form-container {
+      display: flex;
+      justify-content: center;
 
-          &.isin-cell {
-            color: blue;
-          }
+      form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    }
 
-          &.price-cell {
-            color: green;
-          }
+    .stocks-card {
+      margin-top: 35px;
 
-          &.bid-cell {
-            color: yellow;
-          }
-
-          &.ask-cell {
-            color: red;
-          }
-        }
-
-        .unsubscribe-cell {
-          text-align: center;
-
-          .unsubscribe-button {
-            background-color: red;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            width: 100%;
-          }
-        }
+      table {
+        display: block;
+        overflow-x: auto;
       }
     }
   }

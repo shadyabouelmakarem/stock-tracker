@@ -102,4 +102,15 @@ export default {
     opacity: 0;
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .toast-container {
+    right: 50%;
+    transform: translateX(50%);
+
+    .toast-message {
+      text-align: center;
+    }
+  }
+}
 </style>

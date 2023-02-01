@@ -24,6 +24,7 @@ export default defineComponent({
   background: transparent;
   color: var(--color-foreground3);
   font-family: inherit;
+  font-size: inherit;
 
   &:focus {
     outline: none;

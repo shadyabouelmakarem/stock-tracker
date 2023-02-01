@@ -14,6 +14,7 @@
   background: var(--color-primary-blue2);
   color: var(--color-foreground3);
   font-family: inherit;
+  font-size: inherit;
 
   &:hover {
     background: var(--color-primary-blue3);
