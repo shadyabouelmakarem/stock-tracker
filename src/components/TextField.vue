@@ -1,6 +1,20 @@
 <template>
-  <input class="text-field" />
+  <input class="text-field" :value="value" />
 </template>
+
+<script>
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  props: {
+    value: {
+      type: String,
+      default: "",
+    },
+  },
+});
+</script>
+
 
 <style lang="scss">
 .text-field {
