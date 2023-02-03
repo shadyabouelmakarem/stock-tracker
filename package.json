@@ -1,20 +1,28 @@
 {
   "name": "trade-republic-challenge",
-  "private": true,
   "version": "0.1.1",
+  "private": true,
   "scripts": {
-    "dev": "concurrently \"node server.mjs\" \"vite\"",
     "build": "vue-tsc --noEmit && vite build",
+    "test:unit": "vue-cli-service test:unit",
+    "dev": "concurrently \"node server.mjs\" \"vite\"",
     "preview": "concurrently \"node server.mjs\" \"vite preview\"",
-    "test": "echo \n\nReplace this command with your own test runner.\n\n"
+    "test": "jest"
   },
   "dependencies": {
+    "ts-jest": "^27.1.5",
     "vue": "^3.2.41"
   },
   "devDependencies": {
     "@types/node": "^18.11.5",
     "@vitejs/plugin-vue": "^3.1.2",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-unit-jest": "~5.0.0",
+    "@vue/test-utils": "^2.2.9",
+    "@vue/vue3-jest": "^27.0.0",
+    "babel-jest": "^27.0.6",
     "concurrently": "^7.5.0",
+    "jest": "^27.5.1",
     "sass": "^1.55.0",
     "typescript": "^4.8.4",
     "vite": "^3.1.8",

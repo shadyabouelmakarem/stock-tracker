@@ -8,7 +8,7 @@ import ToastCenter from "./components/ToastCenter.vue";
 import "./index.css";
 
 // Define the structure of the Stock object
-interface Stock {
+export interface Stock {
   isin: string;
   price: number;
   bid: number;
