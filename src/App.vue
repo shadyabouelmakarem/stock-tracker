@@ -107,10 +107,10 @@ export default defineComponent({
 </script>
 
 <template>
-  <Header />
+  <Header class="fade-in" />
   <main class="main">
-    <div class="form-container">
-      <form @submit.prevent="isin && submitForm()">
+    <div class="form-container fade-in delay-1">
+      <form @submit.prevent="isin && !validationError && submitForm()">
         <div class="form-field">
           <TextField
             placeholder="Enter ISIN"
@@ -122,10 +122,14 @@ export default defineComponent({
             {{ validationError }}
           </p>
         </div>
-        <Button class="subscribe-button">Subscribe</Button>
+        <Button
+          :class="[isin && !validationError ? 'pulse' : 'shake']"
+          class="subscribe-button"
+          >Subscribe</Button
+        >
       </form>
     </div>
-    <Card class="stocks-card">
+    <Card class="stocks-card fade-in delay-2">
       <table v-if="Object.keys(subscribedStocks).length" class="data-table">
         <thead>
           <tr class="header-row">
@@ -137,14 +141,17 @@ export default defineComponent({
           </tr>
         </thead>
         <tbody>
-          <template v-for="(stock, isin) in subscribedStocks">
+          <template v-for="(stock, isin) in subscribedStocks" :key="stock.isin">
             <tr class="data-row">
               <td class="data-cell isin-cell">{{ isin }}</td>
               <td class="data-cell price-cell">{{ stock?.price }}</td>
               <td class="data-cell bid-cell">{{ stock?.bid }}</td>
               <td class="data-cell ask-cell">{{ stock?.ask }}</td>
               <td class="data-cell unsubscribe-cell">
-                <button class="unsubscribe-button" @click="unsubscribe(isin)">
+                <button
+                  class="unsubscribe-button pulse"
+                  @click="unsubscribe(isin)"
+                >
                   Unsubscribe
                 </button>
               </td>
@@ -186,6 +193,14 @@ export default defineComponent({
   .subscribe-button {
     cursor: pointer;
     margin-top: 10px;
+    animation: none;
+
+    &.pulse:active {
+      animation: pulse 0.1s ease-out;
+    }
+    &.shake:active {
+      animation: shake 0.1s ease-out;
+    }
   }
 
   .stocks-card {
@@ -245,6 +260,10 @@ export default defineComponent({
               font-size: 16px;
               cursor: pointer;
               width: 100%;
+
+              &.pulse:active {
+                animation: pulse 0.1s ease-out;
+              }
             }
           }
         }
@@ -258,6 +277,7 @@ export default defineComponent({
   }
 }
 
+// responsive styles
 @media only screen and (max-width: 600px) {
   .main {
     font-size: 20px !important;
@@ -281,6 +301,61 @@ export default defineComponent({
         overflow-x: auto;
       }
     }
+  }
+}
+
+// Animations
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-10px);
+  }
+  40% {
+    transform: translateX(10px);
+  }
+  60% {
+    transform: translateX(-10px);
+  }
+  80% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.delay-1 {
+  animation-delay: 0.5s;
+}
+.delay-2 {
+  animation-delay: 1s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 </style>
